@@ -24,7 +24,7 @@ The API contract supports both ZATCA Phase-2 e-invoice transaction profiles thro
 ## 2. API Endpoint & Authentication
 
 ```http
-POST /api/method/your_custom_app.api.create_zatca_invoice
+POST /api/method/integrations.api.create_zatca_invoice
 Host: <your-site>.batcherp.net
 Content-Type: application/json
 Authorization: token <api_key>:<api_secret>
@@ -227,7 +227,9 @@ The Batch ERP integration backend automatically verifies the following rules bef
    * B2C invoices must **never** contain mandatory address validations. The XML structure generated will omit `<cac:PostalAddress>` to comply with ZATCA Simplified invoice specifications.
 5. **Net Unit Price Requirement:**
    * `unit_price` must always represent the price **before VAT**. The VAT amount is computed as:
-     $$\text{VAT Amount} = (\text{qty} \times \text{unit\_price} - \text{discount}) \times \frac{\text{vat\_rate}}{100}$$
+     ```text
+     VAT Amount = (qty * unit_price - discount) * (vat_rate / 100)
+     ```
 
 ---
 
