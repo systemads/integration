@@ -60,7 +60,6 @@ Authorization: token <api_key>:<api_secret>
       "vat_rate": 15
     }
   ],
-  "notes": "Contract reference: PO-2026-089"
 }
 ```
 
@@ -104,7 +103,6 @@ Authorization: token <api_key>:<api_secret>
 | `date` | String | **Yes** | **Yes** | `YYYY-MM-DD` (e.g. `"2026-10-01"`) | Invoice issue date (`cbc:IssueDate`). Must be the transaction date. |
 | `due_date` | String | **Yes** | **Yes** | `YYYY-MM-DD` | Due date or actual date of supply (`cbc:ActualDeliveryDate`). For cash sales, equal to `date`. |
 | `currency` | String | No | No | `ISO 4217` (e.g. `"SAR"`, `"USD"`) | Default: `"SAR"`. For foreign currencies, VAT is converted to SAR per ZATCA regulation. |
-| `notes` | String | No | No | Freeform text | Optional document notes or purchase order references. |
 
 ---
 
@@ -176,10 +174,7 @@ The Batch ERP integration backend automatically verifies the following rules bef
 4. **B2C Address Exemption:**
    * B2C invoices must **never** contain mandatory address validations. The XML structure generated will omit `<cac:PostalAddress>` to comply with ZATCA Simplified invoice specifications.
 5. **Net Unit Price Requirement:**
-   * `unit_price` must always represent the price **before VAT**. The VAT amount is computed as:
-     ```text
-     VAT Amount = (qty * unit_price - discount) * (vat_rate / 100)
-     ```
+   * `unit_price` must always represent the price **before VAT**.
 
 ---
 
